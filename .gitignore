@@ -1,0 +1,11 @@
+# binary file
+a.out
+./philo
+*.a
+*.o
+
+# setting file
+.vscode
+
+# draw.io
+*drawio

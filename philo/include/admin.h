@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   admin.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: itakumi <itakumi@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/08 15:07:11 by itakumi           #+#    #+#             */
-/*   Updated: 2025/09/08 16:53:45 by itakumi          ###   ########.fr       */
+/*   Created: 2025/09/08 15:12:09 by itakumi           #+#    #+#             */
+/*   Updated: 2025/09/08 15:35:53 by itakumi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int main(void)
-{
-	
-	return (0);
-}
+#ifndef ADMIN_H
+# define ADMIN_H
+
+# define GETTIMEOFDAY_ERROR		"Error: gettimeofday failed"
+
+#endif
