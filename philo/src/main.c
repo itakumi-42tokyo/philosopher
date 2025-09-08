@@ -6,12 +6,16 @@
 /*   By: itakumi <itakumi@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 15:07:11 by itakumi           #+#    #+#             */
-/*   Updated: 2025/09/08 16:53:45 by itakumi          ###   ########.fr       */
+/*   Updated: 2025/09/08 17:12:49 by itakumi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int main(void)
+#include <pthread.h>
+
+int	main(int argc, char **argv)
 {
-	
+	pthread_mutex_t	mutex;
+
+	parse_args(argc, argv);
 	return (0);
 }
