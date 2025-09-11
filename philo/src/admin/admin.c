@@ -17,6 +17,7 @@
 #include "philosophers.h"
 #include "admin.h"
 #include "utils.h"
+#include "error_macro.h"
 
 // 1s = 1000ms
 // 1ms = 1000us

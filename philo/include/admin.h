@@ -13,6 +13,6 @@
 #ifndef ADMIN_H
 # define ADMIN_H
 
-# define GETTIMEOFDAY_ERROR		"Error: gettimeofday failed"
+
 
 #endif

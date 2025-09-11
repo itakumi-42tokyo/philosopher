@@ -19,10 +19,12 @@ SRCS					:=	main.c \
 							parse_args.c \
 							ut_atoi_with_error.c \
 							philosophers.c \
-							calc_elapsed_time_usec.c \
+							calc_elapsed_time.c \
 							timestamp.c \
 							ut_issign.c \
-							ut_isspace.c	
+							ut_isspace.c \
+							ut_now_time.c \
+							ut_usleep.c
 
 VPATH					= src:include:src/admin:src/parse:src/philosophers:src/utils
 
@@ -93,9 +95,14 @@ test: $(TEST_PROGS)
 	@$(MAKE) run
 
 run: $(TEST_PROGS)
-	$(foreach l, $< , \
-		@echo "--- Running Test $(notdir $(l)) ---"; \
-		./$(l);)
+	@for prog in $^; do \
+		echo "--- Running Test $$(basename $$prog) ---"; \
+		if [ -f $$prog ]; then \
+			./$$prog \
+		else \
+			echo "Test $$prog not found"; \
+		fi; \
+	done
 
 clean:
 	$(foreach l, $(LIBS), $(MAKE) -C $(LIB_DIR)/$(l) clean;)
@@ -103,8 +110,10 @@ clean:
 
 fclean: clean
 	$(foreach l, $(LIBS), $(MAKE) -C $(LIB_DIR)/$(l) fclean;)
-	$(foreach l, $(TEST_PROGS), rm -f $(l))
+	$(foreach l, $(TEST_PROGS), rm -f $(l);)
 	rm -f $(NAME) $(NAME_DEV)
 
 re: fclean
 	@$(MAKE) all
+
+.SECONDARY:
