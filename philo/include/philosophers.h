@@ -39,7 +39,8 @@ typedef struct s_basic_info
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
-	t_philo			*philos;
+	int				required_eat_count;
+	t_philo			*philosophers;
 }	t_basic_info;
 
 #endif

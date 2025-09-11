@@ -11,11 +11,14 @@
 /* ************************************************************************** */
 
 #include <pthread.h>
+#include "parse.h"
+#include "philosophers.h"
 
 int	main(int argc, char **argv)
 {
-	pthread_mutex_t	mutex;
+	// pthread_mutex_t	mutex;
+	t_basic_info	info;
 
-	parse_args(argc, argv);
+	parse_args(argc, argv, &info);
 	return (0);
 }

@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   philo.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: itakumi <itakumi@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/08 15:54:09 by itakumi           #+#    #+#             */
-/*   Updated: 2025/09/08 16:02:56 by itakumi          ###   ########.fr       */
+/*   Created: 2025/09/08 17:00:47 by itakumi           #+#    #+#             */
+/*   Updated: 2025/09/08 17:20:58 by itakumi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include <pthread.h>
 
-# include <sys/time.h>
-# include "philosophers.h"
+void	philosopher(void *arg)
+{
+	static pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 
-long long	calc_elapsed_time_usec(struct timeval before, struct timeval after);
-void		put_timestamp(t_state state, int philo_number);
-int			ut_issign(int c);
-int			ut_isspace(int c);
-
-#endif
+	(void)mutex;
+	(void)arg;
+}

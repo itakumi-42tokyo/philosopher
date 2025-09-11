@@ -1,24 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   ut_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: itakumi <itakumi@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/08 15:54:09 by itakumi           #+#    #+#             */
-/*   Updated: 2025/09/08 16:02:56 by itakumi          ###   ########.fr       */
+/*   Created: 2025/06/25 09:21:21 by itakumi           #+#    #+#             */
+/*   Updated: 2025/06/25 09:22:36 by itakumi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
-
-# include <sys/time.h>
-# include "philosophers.h"
-
-long long	calc_elapsed_time_usec(struct timeval before, struct timeval after);
-void		put_timestamp(t_state state, int philo_number);
-int			ut_issign(int c);
-int			ut_isspace(int c);
-
-#endif
+int	ut_isspace(int c)
+{
+	if ((c >= '\t' && c <= '\r') || c == ' ')
+		return (1);
+	return (0);
+}

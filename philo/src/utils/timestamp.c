@@ -11,11 +11,13 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "philosopers.h"
+#include "philosophers.h"
 #include "timestamp.h"
 
 void	put_timestamp(t_state state, int philo_number)
 {
+	(void)philo_number;
+
 	if (state == TAKING_FORK)
 		ft_putendl_fd(TAKING_FORK_MSG, STDOUT_FILENO);
 	else if (state == EATING)

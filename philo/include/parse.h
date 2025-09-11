@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itakumi <itakumi@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: tigarashi <tigarashi@student.42.fr>        #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/08 17:00:47 by itakumi           #+#    #+#             */
-/*   Updated: 2025/09/08 17:20:58 by itakumi          ###   ########.fr       */
+/*   Created: 2025-09-11 06:59:41 by tigarashi         #+#    #+#             */
+/*   Updated: 2025-09-11 06:59:41 by tigarashi        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <pthread.h>
+#ifndef PARSE_H
+# define PARSE_H
 
-void	philo(void *arg)
-{
-	static pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
-}
+
+int		parse_args(int argc, char **argv, t_basic_info *info);
+int		ut_atoi_with_error(char *str);
+
+#endif

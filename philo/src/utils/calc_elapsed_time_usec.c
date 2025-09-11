@@ -13,12 +13,12 @@
 #include <sys/time.h>
 
 // before afterの関係は取れているものとする。
-long int	calc_elapsed_time_usec(struct timeval before, struct timeval after)
+long long	calc_elapsed_time_usec(struct timeval before, struct timeval after)
 {
 	const long long	one_million = 1000000;
-	long int		second;
-	long int		micro_second;
-	long int		result;
+	long long		second;
+	long long		micro_second;
+	long long		result;
 
 	second = after.tv_sec - before.tv_sec;
 	micro_second = after.tv_usec - before.tv_usec;

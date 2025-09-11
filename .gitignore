@@ -1,8 +1,16 @@
-# binary file
-a.out
-./philo
+# build
 *.a
 *.o
+*.out
+*.so
+*.exe
+build/
+tmp/
+
+# bin
+./philo
+a.out
+*.bin
 
 # setting file
 .vscode
