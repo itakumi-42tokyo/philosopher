@@ -1,28 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   putendl_fd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itakumi <itakumi@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: tigarashi <tigarashi@student.42.fr>        #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/24 22:25:59 by itakumi           #+#    #+#             */
-/*   Updated: 2025/06/19 15:42:16 by itakumi          ###   ########.fr       */
+/*   Created: 2025-09-12 04:54:25 by tigarashi         #+#    #+#             */
+/*   Updated: 2025-09-12 04:54:25 by tigarashi        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <stddef.h>
+#include <unistd.h>
 
-size_t	ft_strlen(const char *s)
+static size_t	_strlen(char *s)
 {
-	int	n;
+	char	*s_cpy;
 
 	if (s == NULL)
 		return (0);
-	n = 0;
-	while (*s)
-	{
-		s++;
-		n++;
-	}
-	return (n);
+	s_cpy = s;
+	while (*s_cpy != '\0')
+		s_cpy++;
+	return ((size_t)(s_cpy - s));
+}
+
+void	putendl_fd(char *s, int fd)
+{
+	size_t	size;
+
+	size = _strlen(s);
+	write(fd, s, size);
+	write(fd, "\n", 1);
 }

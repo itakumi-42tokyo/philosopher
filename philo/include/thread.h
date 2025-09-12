@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
+/*   thread.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itakumi <itakumi@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: tigarashi <tigarashi@student.42.fr>        #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/27 16:16:05 by itakumi           #+#    #+#             */
-/*   Updated: 2025/05/02 15:38:34 by itakumi          ###   ########.fr       */
+/*   Created: 2025-09-12 00:41:43 by tigarashi         #+#    #+#             */
+/*   Updated: 2025-09-12 00:41:43 by tigarashi        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef THREAD_H
+# define THREAD_H
 
-void	ft_putendl_fd(char *s, int fd)
-{
-	int	size;
+# include "philosophers.h"
 
-	size = ft_strlen(s);
-	write(fd, s, size);
-	write(fd, "\n", 1);
-}
+int		create_threads(t_basic_info *info);
 
-// int	main(void)
-// {
-// 	ft_putendl_fd("blyu", 0);
-// 	return (0);
-// }
+#endif

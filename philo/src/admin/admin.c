@@ -13,7 +13,6 @@
 #include <sys/time.h>
 #include <unistd.h>
 #include <errno.h>
-#include "libft.h"
 #include "philosophers.h"
 #include "admin.h"
 #include "utils.h"
@@ -49,7 +48,7 @@ void	admin(t_basic_info *info)
 		if (info->required_eat_count == eated_count)
 			// exit(0);
 		if (gettimeofday(&now, NULL) == -1)
-			ft_putendl_fd(GETTIMEOFDAY_ERROR, STDERR_FILENO);
+			putendl_fd(GETTIMEOFDAY_ERROR, STDERR_FILENO);
 		elapsed_time
 			= calc_elapsed_time_usec(now, info->philosophers[0].last_eat);
 		if (elapsed_time > info->time_to_die)

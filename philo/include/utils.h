@@ -26,5 +26,7 @@ long long	now_us(void);
 void		sleep_ms_polling(long ms);
 void 		sleep_ms_adaptive(long long ms);
 void 		sleep_us_adaptive(long long us);
+void		free_all(t_basic_info *info);
+void		putendl_fd(char *s, int fd);
 
 #endif

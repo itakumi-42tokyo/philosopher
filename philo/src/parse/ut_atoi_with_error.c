@@ -13,8 +13,14 @@
 #include <stdbool.h>
 #include <limits.h>
 #include <stddef.h>
-#include "libft.h"
 #include "utils.h"
+
+static int	_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}
 
 static bool	has_no_minus_sign(const char *str)
 {
@@ -44,7 +50,7 @@ int	ut_atoi_with_error(char *str)
 		str++;
 	while (*str == '+')
 		str++;
-	while (ft_isdigit(*str) == true)
+	while (_isdigit(*str) == true)
 	{
 		result = result * 10 + *str - '0';
 		if (result > INT_MAX)

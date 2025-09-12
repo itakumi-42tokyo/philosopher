@@ -1,40 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ut_now_time.c                                      :+:      :+:    :+:   */
+/*   error_exit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tigarashi <tigarashi@student.42.fr>        #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-09-11 09:56:13 by tigarashi         #+#    #+#             */
-/*   Updated: 2025-09-11 09:56:13 by tigarashi        ###   ########.fr       */
+/*   Created: 2025-09-11 12:02:55 by tigarashi         #+#    #+#             */
+/*   Updated: 2025-09-11 12:02:55 by tigarashi        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include <unistd.h>
-#include <sys/time.h>
 #include "error_macro.h"
 #include "utils.h"
 
-long long	now_ms(void)
+void	error_exit(int check)
 {
-	struct timeval ts;
-
-	if (gettimeofday(&ts, NULL) == -1)
-	{
-		putendl_fd(GETTIMEOFDAY_ERROR, STDERR_FILENO);
-		return (-1);
-	}
-	return (ts.tv_sec * 1000LL + ts.tv_usec / 1000LL);
-}
-
-long long	now_us(void)
-{
-	struct timeval ts;
-
-	if (gettimeofday(&ts, NULL) == -1)
-	{
-		putendl_fd(GETTIMEOFDAY_ERROR, STDERR_FILENO);
-		return (-1);
-	}
-	return (ts.tv_sec * 1000000LL + ts.tv_usec);
+	if (check == -1)
+		putendl_fd(INVALID_ARGC_ERROR, STDERR_FILENO);
+	else if (check == -2)
+		putendl_fd(MINUS_ERROR, STDERR_FILENO);
+	else if (check == -3)
+		putendl_fd(EXCEEDS_INT_MAX_ERROR, STDERR_FILENO);
+	else if (check == -4)
+		putendl_fd(NAN_INPUT_ERROR, STDERR_FILENO);
+	else if (check == -5)
+		putendl_fd(MALLOC_ERROR, STDERR_FILENO);
+	else
+		putendl_fd(USAGE_ERROR, STDERR_FILENO);
+	exit(EXIT_FAILURE);
 }

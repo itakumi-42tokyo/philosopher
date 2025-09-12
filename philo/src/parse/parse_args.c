@@ -28,6 +28,7 @@ static void	substitute_info(t_basic_info *info, int i, int result)
 		info->required_eat_count = result;
 }
 
+//　引数の中に "0" が含まれていた場合は，この後対処することが要求されている。 
 int	parse_args(int argc, char **argv, t_basic_info *info)
 {
 	int		i;
@@ -46,6 +47,7 @@ int	parse_args(int argc, char **argv, t_basic_info *info)
 	}
 	if (argc == 5)
 		info->required_eat_count = -1;
+	info->stop_flag = false;
 	return (0);
 }
 // required_eat_countは０に到達するまで行う回数とする？

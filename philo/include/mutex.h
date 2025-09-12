@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_tolower.c                                       :+:      :+:    :+:   */
+/*   mutex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: itakumi <itakumi@student.42tokyo.jp>       +#+  +:+       +#+        */
+/*   By: tigarashi <tigarashi@student.42.fr>        #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/26 14:05:18 by itakumi           #+#    #+#             */
-/*   Updated: 2025/05/04 23:18:06 by itakumi          ###   ########.fr       */
+/*   Created: 2025-09-11 23:08:57 by tigarashi         #+#    #+#             */
+/*   Updated: 2025-09-11 23:08:57 by tigarashi        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_tolower(int c)
-{
-	if (c >= 65 && c <= 90)
-	{
-		c += 32;
-	}
-	return (c);
-}
+#ifndef MUTEX_H
+# define MUTEX_H
+
+# include "philosophers.h"
+
+int		init_mutexes(t_basic_info *info);
+
+#endif

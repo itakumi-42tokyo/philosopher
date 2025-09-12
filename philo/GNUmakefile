@@ -24,14 +24,14 @@ SRCS					:=	main.c \
 							ut_issign.c \
 							ut_isspace.c \
 							ut_now_time.c \
-							ut_usleep.c
+							ut_usleep.c \
+							error_exit.c \
+							init_philos.c \
+							init_mutexes.c \
+							putendl_fd.c
 
-VPATH					= src:include:src/admin:src/parse:src/philosophers:src/utils
+VPATH					= src:include:src/admin:src/parse:src/philosopher:src/utils:src/error:src/mutex:src/thread
 
-LIB_DIR					:= lib
-LIBS					:=	libft
-LIBS_INC				:= $(foreach l, $(LIBS), -I $(LIB_DIR)/$(l))
-LIBS_A					:= $(foreach l, $(LIBS), $(LIB_DIR)/$(l)/$(l).a)
 
 OBJ_DIR					:= build
 OBJS					:= $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))
@@ -63,23 +63,20 @@ INC						+= $(LIBS_INC)
 all: $(NAME)
 
 $(NAME): CFLAGS += $(CFLAGS_OPT)
-$(NAME): $(OBJS) $(LIBS_A)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBS_A) $(PTHREAD_FLAG) -o $@
+$(NAME): $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) $(PTHREAD_FLAG) -o $@
 
 $(NAME_DEV): CFLAGS += $(CFLAGS_DEV)
-$(NAME_DEV): $(OBJS_DEV) $(LIBS_A)
-	$(CC) $(CFLAGS) $(OBJS_DEV) $(LIBS_A) $(PTHREAD_FLAG) -o $@
+$(NAME_DEV): $(OBJS_DEV)
+	$(CC) $(CFLAGS) $(OBJS_DEV) $(PTHREAD_FLAG) -o $@
 
 $(OBJ_DIR)/%.o: %.c
 	mkdir -p $(@D)
 	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
-%.a:
-	$(MAKE) all -C $(@D)
-
-$(TEST_DIR)/%: $(OBJ_DIR)/$(TEST_DIR)/%.o $(filter-out $(OBJ_DIR)/main.o, $(OBJS)) $(LIBS_A)
+$(TEST_DIR)/%: $(OBJ_DIR)/$(TEST_DIR)/%.o $(filter-out $(OBJ_DIR)/main.o, $(OBJS))
 	@mkdir -p $(@D)
-	$(CC) $(CFLAGS) $(INC) $< $(filter-out $(OBJ_DIR)/main.o, $(OBJS)) $(LIBS_A) $(PTHREAD_FLAG) -o $@
+	$(CC) $(CFLAGS) $(INC) $< $(filter-out $(OBJ_DIR)/main.o, $(OBJS)) $(PTHREAD_FLAG) -o $@
 
 $(OBJ_DIR)/$(TEST_DIR)/%.o: $(TEST_DIR)/%.c
 	@mkdir -p $(@D)
@@ -105,11 +102,9 @@ run: $(TEST_PROGS)
 	done
 
 clean:
-	$(foreach l, $(LIBS), $(MAKE) -C $(LIB_DIR)/$(l) clean;)
 	rm -rf $(OBJ_DIR)
 
 fclean: clean
-	$(foreach l, $(LIBS), $(MAKE) -C $(LIB_DIR)/$(l) fclean;)
 	$(foreach l, $(TEST_PROGS), rm -f $(l);)
 	rm -f $(NAME) $(NAME_DEV)
 

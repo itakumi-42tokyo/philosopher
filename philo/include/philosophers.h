@@ -14,6 +14,8 @@
 # define PHILOSOPHERS_H
 
 # include <sys/time.h>
+# include <pthread.h>
+# include <stdbool.h>
 
 typedef enum e_state
 {
@@ -24,6 +26,7 @@ typedef enum e_state
 	DIED
 }	t_state;
 
+// 食事回数がオーバーフローする可能性がある
 typedef struct s_philo
 {
 	int				id;
@@ -32,7 +35,7 @@ typedef struct s_philo
 	int				eat_count;
 }	t_philo;
 
-// 時間はミリ秒で表される。
+// forkの状態はナンバリングして，bool値で管理するのが良いかな？
 typedef struct s_basic_info
 {
 	int				the_number_of_philosophers;
@@ -40,7 +43,16 @@ typedef struct s_basic_info
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				required_eat_count;
+	bool			stop_flag;
+	int				initialized_mutexes;
+	int				created_threads;
+	pthread_t		*threads;
+	pthread_mutex_t	*forks;
+	pthread_mutex_t	print_action;
 	t_philo			*philosophers;
 }	t_basic_info;
+
+void	*philosopher(void *arg);
+void	init_philos(t_basic_info *info);
 
 #endif
