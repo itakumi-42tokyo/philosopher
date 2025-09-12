@@ -6,32 +6,32 @@
 #include <sys/time.h>
 #include "philosophers.h"
 
-static void init_basic_info(t_basic_info *info)
+static void init_shared(t_shared *share)
 {
-    if (!info)
+    if (!share)
         return;
 
     // 全てを 0 で初期化
-    memset(info, 0, sizeof(t_basic_info));
+    memset(share, 0, sizeof(t_shared));
 
     // bool 型や mutex は 0 初期化で false / PTHREAD_MUTEX_INITIALIZER 相当になる
-    info->stop_flag = false;
+    share->stop_flag = false;
 
     // mutex は静的初期化もできるが、動的初期化する場合は
-    // pthread_mutex_init(&(info->print_action), NULL);
+    // pthread_mutex_init(&(share->print_action), NULL);
 }
 
 int main(void)
 {
-	t_basic_info	info;
+	t_shared	share;
 	pthread_t	thread1;
 
-	init_basic_info(&info);
-	pthread_create(&thread1, NULL, philosopher, (void *)(&info));
+	init_shared(&share);
+	pthread_create(&thread1, NULL, philosopher, (void *)(&share));
 
 	sleep(3);
 
-	info.stop_flag = true;
+	share.stop_flag = true;
 	
 	pthread_join(thread1, NULL);
 

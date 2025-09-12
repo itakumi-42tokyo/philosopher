@@ -36,24 +36,24 @@ static int	check_ret(int ret)
 
 // 管理者用スレッドはどのような別変数にしたほうがよさそうかな？
 // 本当はエラーメッセージ用関数を設計したほうがよさそう。だけど，今回はいいや，
-int	create_threads(t_basic_info *info)
+int	create_threads(t_shared *share, pthread_t *threads)
 {
 	int	i;
 	int	ret;
 
 	i = 0;
-	info->threads = malloc(sizeof(pthread_t) * info->the_number_of_philosophers);
-	if (info->threads == NULL)
+	threads = malloc(sizeof(pthread_t) * share->num_philos);
+	if (threads == NULL)
 		return (putendl_fd(MALLOC_ERROR, STDERR_FILENO), -1);
-	while (i < info->the_number_of_philosophers)
+	while (i < share->num_philos)
 	{
-		ret = thread_create(&(info->threads[i]), NULL, philosopher, info); // 一旦，info
+		ret = thread_create(&(threads[i]), NULL, philosopher, share); // 一旦，info
 		if (check_ret(ret) == -1)
 		{
-			info->stop_flag = true;
+			share->stop_flag = true;
 			while (i > 0)
 			{
-				thread_join(info->threads[i], NULL);
+				thread_join(threads[i], NULL);
 				i++;
 			}
 			return (-1);

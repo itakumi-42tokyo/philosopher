@@ -15,6 +15,10 @@
 
 # include "philosophers.h"
 
-int		create_threads(t_basic_info *info);
+int		create_threads(t_shared *share, pthread_t *threads);
+int		is_stopped(t_shared *share);
+void	print_action(t_philo *philos, const char *msg);
+void	put_forks(t_philo *philo);
+int		take_forks(t_philo *philo);
 
 #endif

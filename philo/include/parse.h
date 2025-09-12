@@ -15,7 +15,7 @@
 
 # include "philosophers.h"
 
-int		parse_args(int argc, char **argv, t_basic_info *info);
+int		parse_args(int argc, char **argv, t_shared *share);
 int		ut_atoi_with_error(char *str);
 
 #endif

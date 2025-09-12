@@ -16,24 +16,26 @@
 #include "philosophers.h"
 #include "thread.h"
 #include "utils.h"
+#include "mutex.h"
+#include "monitor.h"
 
 // やはり，堅牢性を求めると出力系の関数にまで，手を加える必要が出てくるところが面倒
-static int	alloc_philo_fork_thread(t_basic_info *info, int the_number_of_philo)
+static int	alloc_philo_fork_thread(t_shared *share, t_philo *philos, pthread_t threads, int num_philos)
 {
-	info->philosophers = malloc(sizeof(t_philo) * the_number_of_philo);
-	if (info->philosophers == NULL)
+	philos = malloc(sizeof(t_philo) * num_philos);
+	if (philos == NULL)
 		return (-5);
-	info->forks = malloc(sizeof(pthread_mutex_t) * the_number_of_philo);
-	if(info->forks == NULL)
+	share->forks = malloc(sizeof(pthread_mutex_t) * num_philos);
+	if(share->forks == NULL)
 	{
-		free(info->philosophers);
+		free(philos);
 		return (-5);
 	}
-	info->threads = malloc(sizeof(pthread_t) * the_number_of_philo + 1);
-	if (info->threads == NULL)
+	threads = malloc(sizeof(pthread_t) * num_philos + 1);
+	if (threads == NULL)
 	{
-		free(info->philosophers);
-		free(info->forks);
+		free(philos);
+		free(share->forks);
 		return (-5);
 	}
 	return (0);
@@ -41,22 +43,30 @@ static int	alloc_philo_fork_thread(t_basic_info *info, int the_number_of_philo)
 // threadが必要なのは哲学者の数と，管理者１人？
 // mutexが必要なのはフォークと出力用のミューテックス？
 
-// DB: philo(malloc)
+// info みたいにまとめて管理する必要を疑わなかったことが原因だ。
 int	main(int argc, char **argv)
 {
-	t_basic_info	info;
-	int				check;
+	t_shared	share;
+	t_philo		*philos;
+	pthread_t	*threads;
+	t_monitor	*monitor;
+	int			check;
 
-	check = parse_args(argc, argv, &info);
+	check = parse_args(argc, argv, &share);
 	if (check != 0)
 		error_exit(check);
-	check = alloc_philo_fork_thread(&info, info.the_number_of_philosophers);
+	init_all(&share);
+	check = alloc_philo_fork_thread(&share, philos, threads, share.num_philos);
 	if (check != 0)
 		error_exit(check);
-	init_philos(&info);
-	if (init_mutexes(&info) == -1)
-		return (free_all(&info), EXIT_FAILURE);
-	if (create_threads(&info) == -1)
-		return (free_all(&info), EXIT_FAILURE);
-	return (0);
+	if (init_mutexes(&share) == -1)
+		return (free_all(&share), EXIT_FAILURE);
+	init_philos(&share);
+	init_monitor(&monitor, philos, &share);
+	if (create_threads(&share, threads) == -1)
+		return (free_all(&share), EXIT_FAILURE);
+	// 実行開始
+	// この処理を考える前に，どのようにして，forkを再現するかとか
+	// philosopherの処理手順を書く必要がある。
+	return (EXIT_SUCCESS);
 }

@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_philos.c                                      :+:      :+:    :+:   */
+/*   init_all.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tigarashi <tigarashi@student.42.fr>        #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-09-11 21:22:34 by tigarashi         #+#    #+#             */
-/*   Updated: 2025-09-11 21:22:34 by tigarashi        ###   ########.fr       */
+/*   Created: 2025-09-12 05:20:16 by tigarashi         #+#    #+#             */
+/*   Updated: 2025-09-12 05:20:16 by tigarashi        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <string.h>
 #include "philosophers.h"
 
-void	init_philos(t_philo *philos, t_shared *share)
+void	init_all(t_shared *share)
 {
-	int	id;
-
-	id = 0;
-	while (id < share->num_philos)
-	{
-		(philos[id]).id = id;
-		(philos[id]).left_fork = id;
-		(philos[id]).right_fork = (id + 1) % share->num_philos;
-		(philos[id]).last_eat_ms = 0; // ??
-		(philos[id]).share = share;
-		id++;
-	}
+	if (!share)
+		return;
+	memset(share, 0, sizeof(t_shared));
+	pthread_mutex_init(&(share->print_mutex), NULL);
 }

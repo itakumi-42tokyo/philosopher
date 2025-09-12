@@ -10,26 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "parse.h"
 #include "philosophers.h"
 
-static void	substitute_info(t_basic_info *info, int i, int result)
+static void	substitute_info(t_shared *share, int i, int result)
 {
 	if (i == 0)
-		info->the_number_of_philosophers = result;
+		share->num_philos = result;
 	else if (i == 1)
-		info->time_to_die = result;
+		share->time_to_die = result;
 	else if (i == 2)
-		info->time_to_eat = result;
+		share->time_to_eat = result;
 	else if (i == 3)
-		info->time_to_sleep = result;
+		share->time_to_sleep = result;
 	else if (i == 4)
-		info->required_eat_count = result;
+		share->required_eat_count = result;
 }
 
 //　引数の中に "0" が含まれていた場合は，この後対処することが要求されている。 
-int	parse_args(int argc, char **argv, t_basic_info *info)
+int	parse_args(int argc, char **argv, t_shared *share)
 {
 	int		i;
 	int		result;
@@ -42,12 +41,12 @@ int	parse_args(int argc, char **argv, t_basic_info *info)
 		result = ut_atoi_with_error(argv[i]);
 		if (result < 0)
 			return (result);
-		substitute_info(info, i, result);
+		substitute_info(share, i, result);
 		i++;
 	}
 	if (argc == 5)
-		info->required_eat_count = -1;
-	info->stop_flag = false;
+		share->required_eat_count = -1;
+	share->stop_flag = false;
 	return (0);
 }
 // required_eat_countは０に到達するまで行う回数とする？

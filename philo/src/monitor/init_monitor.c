@@ -1,29 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_philos.c                                      :+:      :+:    :+:   */
+/*   init_monitor.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tigarashi <tigarashi@student.42.fr>        #+#  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-09-11 21:22:34 by tigarashi         #+#    #+#             */
-/*   Updated: 2025-09-11 21:22:34 by tigarashi        ###   ########.fr       */
+/*   Created: 2025-09-12 21:45:23 by tigarashi         #+#    #+#             */
+/*   Updated: 2025-09-12 21:45:23 by tigarashi        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	init_philos(t_philo *philos, t_shared *share)
+void	init_monitor(t_monitor *monitor, t_philo *philos, t_shared *share)
 {
-	int	id;
-
-	id = 0;
-	while (id < share->num_philos)
-	{
-		(philos[id]).id = id;
-		(philos[id]).left_fork = id;
-		(philos[id]).right_fork = (id + 1) % share->num_philos;
-		(philos[id]).last_eat_ms = 0; // ??
-		(philos[id]).share = share;
-		id++;
-	}
+	monitor->philos = philos;
+	monitor->share = share;
 }

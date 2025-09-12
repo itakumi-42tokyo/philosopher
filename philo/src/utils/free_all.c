@@ -16,19 +16,22 @@
 // mutexがあるかどうかを確認するスイッチは必要だろうか？
 // エラーを出すとわかっているのにその関数を使うのはナンセンス？
 
-void	free_all(t_basic_info *info)
+void	free_all(t_shared *shared, t_philo *philos, pthread_t *threads)
 {
 	int	i;
 
 	i = 0;
-	if (info == NULL)
+	if (shared == NULL)
 		return ;
-	while (i < info->the_number_of_philosophers)
+	while (i < shared->num_philos)
 	{
-		pthread_mutex_destroy(&(info->forks[i]));
+		pthread_mutex_destroy(&(shared->forks[i]));
 		i++;
 	}
-	free(info->philosophers);
-	free(info->forks);
-	free(info->threads);
+	free(philos);
+	philos = NULL;
+	free(shared->forks);
+	shared->forks = NULL;
+	free(threads);
+	threads = NULL;
 }

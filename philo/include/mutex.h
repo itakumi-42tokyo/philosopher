@@ -15,6 +15,6 @@
 
 # include "philosophers.h"
 
-int		init_mutexes(t_basic_info *info);
+int		init_mutexes(t_shared *share);
 
 #endif

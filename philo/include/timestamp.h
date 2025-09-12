@@ -13,10 +13,10 @@
 #ifndef TIMESTAMP_H
 # define TIMESTAMP_H
 
-# define TAKING_FORK_MSG		"timestamp_in_ms %d has taken a fork"
-# define EATING_MSG				"timestamp_in_ms %d is eating"
-# define SLEEPING_MSG			"timestamp_in_ms %d is sleeping"
-# define THINKING_MSG			"timestamp_in_ms %d is thinking"
-# define DIED_MSG				"timestamp_in_ms %d died"
+# define TAKING_FORK_MSG		"has taken a fork"
+# define EATING_MSG				"is eating"
+# define SLEEPING_MSG			"is sleeping"
+# define THINKING_MSG			"is thinking"
+# define DIED_MSG				"died"
 
 #endif

@@ -15,10 +15,10 @@ override NAME			:= philo
 override NAME_DEV		:= $(NAME)_dev
 
 SRCS					:=	main.c \
-							admin.c \
+							monitor.c \
 							parse_args.c \
 							ut_atoi_with_error.c \
-							philosophers.c \
+							philosopher.c \
 							calc_elapsed_time.c \
 							timestamp.c \
 							ut_issign.c \
@@ -28,9 +28,13 @@ SRCS					:=	main.c \
 							error_exit.c \
 							init_philos.c \
 							init_mutexes.c \
-							putendl_fd.c
+							putendl_fd.c \
+							init_all.c \
+							print_action.c \
+							is_stopped.c \
+							take_forks.c
 
-VPATH					= src:include:src/admin:src/parse:src/philosopher:src/utils:src/error:src/mutex:src/thread
+VPATH					= src:include:src/monitor:src/parse:src/philosopher:src/utils:src/error:src/mutex:src/thread
 
 
 OBJ_DIR					:= build
