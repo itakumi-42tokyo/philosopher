@@ -34,6 +34,10 @@ static void	mark_stop(t_shared *share)
 // 	pthread_mutex_unlock(&print);
 // }
 
+//1. 美しくするにはcreate_threadの完了を待つまで，哲学者をeatingさせる。
+//2. 完了したら，last_eat_msを更新し，はじめに，print_actionするようにする。
+// 3. ？？
+
 void	*philosopher(void *arg)
 {
 	t_philo		*philo;
@@ -42,13 +46,15 @@ void	*philosopher(void *arg)
 	if (arg == NULL)
 		return (NULL);
 	philo = (t_philo *)arg;
-	if (philo->id % 2 == 1)// 偶奇の重要な部分
+	if (philo->id % 2 == 1 || philo->id == philo->share->num_philos - 1)// 偶奇の重要な部分
+	{
+		print_action(philo, THINKING_MSG); // 5人の時thinkingが表示されなくなってしまった。
 		usleep(1000);
+	}
 	while (is_stopped(philo->share) == false)
 	{
 		if (take_forks(philo) == -1)
 			break ;// 哲学者が１人の場合は死ぬまで処理を続ける必要がある。
-		print_action(philo, EATING_MSG);
 		now = now_ms();
 		if (now < 0)
 			mark_stop(philo->share);
@@ -57,12 +63,13 @@ void	*philosopher(void *arg)
 			pthread_mutex_lock(&(philo->share->state_mutex));
 			philo->last_eat_ms = now;
 			pthread_mutex_unlock(&(philo->share->state_mutex));
-		}
-		usleep(philo->share->time_to_eat * 1000);
+		}	
+		print_action(philo, EATING_MSG);
+		sleep_ms_adaptive(philo->share->time_to_eat);
 		philo->eat_count++;
 		put_forks(philo);
 		print_action(philo, SLEEPING_MSG);
-		usleep(philo->share->time_to_sleep * 1000);
+		sleep_ms_adaptive(philo->share->time_to_sleep);
 		print_action(philo, THINKING_MSG);
 	}
 	return (NULL);

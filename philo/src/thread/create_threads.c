@@ -37,9 +37,6 @@ static int	check_ret(int ret)
 	return (0);
 }
 
-
-// 管理者用スレッドはどのような別変数にしたほうがよさそうかな？
-// 本当はエラーメッセージ用関数を設計したほうがよさそう。だけど，今回はいいや，
 int	create_threads(t_philo *philo_resource, pthread_t *threads, t_monitor *monitor_resource)
 {
 	int	i;
@@ -51,7 +48,7 @@ int	create_threads(t_philo *philo_resource, pthread_t *threads, t_monitor *monit
 	i = 0;
 	while (i < philo_resource->share->num_philos)
 	{
-		ret = pthread_create(&(threads[i]), NULL, philosopher, &(philo_resource[i])); // 一旦，info
+		ret = pthread_create(&(threads[i]), NULL, philosopher, &(philo_resource[i]));
 		if (check_ret(ret) == -1)
 		{
 			philo_resource->share->stop_flag = true;

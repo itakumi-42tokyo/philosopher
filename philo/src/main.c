@@ -35,7 +35,7 @@ static int	alloc_philo_fork_thread(t_shared *share, t_philo **philos, pthread_t 
 		free(*philos);
 		return (-5);
 	}
-	*threads = malloc(sizeof(pthread_t) * num_philos + 1);
+	*threads = malloc(sizeof(pthread_t) * (num_philos + 1));
 	if (*threads == NULL)
 	{
 		free(*philos);
@@ -103,5 +103,6 @@ int	main(int argc, char **argv)
 	if (create_threads(philos, threads, &monitor) == -1)
 		return (free_all(&share, philos, threads), EXIT_FAILURE);
 	join_thread(threads, &share);
+	free_all(&share, philos, threads);
 	return (EXIT_SUCCESS);
 }

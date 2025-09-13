@@ -28,5 +28,4 @@ void	init_philos(t_philo *philos, t_shared *share)
 		(philos[id]).share = share;
 		id++;
 	}
-	printf("now1: %lld\n", (philos[id].last_eat_ms));
 }
