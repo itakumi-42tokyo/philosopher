@@ -39,4 +39,15 @@
 # define THREAD_CREATE_EINVAL_ERROR		"Error: invalid thread attributes"
 # define THREAD_CREATE_EPERM_ERROR		"Error: no permission to set the specified attributes"
 
+// write ERRNO
+# define EBADF_ERROR					"Error: Bad file descriptor\n"
+# define EACCES_ERROR					"Error: Permission denied\n"
+# define EFAULT_ERROR					"Error: Bad address\n"
+
+# define ESRCH_ERROR					"Error: No such process"
+# define EDEADLK_ERROR					"Error: Resource deadlock avoided"
+# define EINIVAL_ERROR					"Error: Invalid argument"
+
+void	error_exit(int check);
+
 #endif

@@ -28,13 +28,16 @@ SRCS					:=	main.c \
 							error_exit.c \
 							init_philos.c \
 							init_mutexes.c \
+							init_monitor.c \
 							putendl_fd.c \
 							init_all.c \
+							free_all.c \
+							create_threads.c \
 							print_action.c \
 							is_stopped.c \
 							take_forks.c
 
-VPATH					= src:include:src/monitor:src/parse:src/philosopher:src/utils:src/error:src/mutex:src/thread
+VPATH					= src:include:src/monitor:src/parse:src/philosopher:src/utils:src/error_handle:src/mutex:src/thread
 
 
 OBJ_DIR					:= build

@@ -27,6 +27,6 @@ void	print_action(t_philo *philos, const char *msg)
 		return ;
 	pthread_mutex_lock(&(philos->share->print_mutex));
 	if (is_stopped(philos->share) == false)
-		printf("%lld %d %s\n", philos->share->start_at_ms, philos->id + 1, msg);
+		printf("%lld %d %s\n", now, philos->id + 1, msg);
 	pthread_mutex_unlock(&(philos->share->print_mutex));
 }

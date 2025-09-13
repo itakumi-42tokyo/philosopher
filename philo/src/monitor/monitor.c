@@ -13,8 +13,8 @@
 #include <sys/time.h>
 #include <unistd.h>
 #include <errno.h>
+#include <stdio.h>
 #include "philosophers.h"
-#include "admin.h"
 #include "utils.h"
 #include "error_macro.h"
 #include "timestamp.h"
@@ -70,9 +70,11 @@ void	*monitor(void *arg)
 			diff = now - monitor->philos[i].last_eat_ms;
 			if (diff > monitor->share->time_to_die)
 			{
-				monitor->share->stop_flag = 1;
 				pthread_mutex_unlock(&(monitor->share->state_mutex));
 				print_action(&(monitor->philos[i]), DIED_MSG);
+				pthread_mutex_lock(&(monitor->share->state_mutex));
+				monitor->share->stop_flag = 1;
+				pthread_mutex_unlock(&(monitor->share->state_mutex));
 				return (NULL);
 			}
 			pthread_mutex_unlock(&(monitor->share->state_mutex));

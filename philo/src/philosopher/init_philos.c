@@ -10,7 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "philosophers.h"
+#include "utils.h"
 
 void	init_philos(t_philo *philos, t_shared *share)
 {
@@ -22,8 +24,9 @@ void	init_philos(t_philo *philos, t_shared *share)
 		(philos[id]).id = id;
 		(philos[id]).left_fork = id;
 		(philos[id]).right_fork = (id + 1) % share->num_philos;
-		(philos[id]).last_eat_ms = 0; // ??
+		(philos[id]).last_eat_ms = now_ms();
 		(philos[id]).share = share;
 		id++;
 	}
+	printf("now1: %lld\n", (philos[id].last_eat_ms));
 }

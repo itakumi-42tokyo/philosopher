@@ -12,8 +12,11 @@
 
 #include "parse.h"
 #include "philosophers.h"
+#include "utils.h"
+#include <stdio.h>
+#include <stdbool.h>
 
-static void	substitute_info(t_shared *share, int i, int result)
+static void	substitute_share(t_shared *share, int i, int result)
 {
 	if (i == 0)
 		share->num_philos = result;
@@ -33,20 +36,22 @@ int	parse_args(int argc, char **argv, t_shared *share)
 	int		i;
 	int		result;
 
-	if (argc != 5 || argc != 6)
+	if ((argc == 5 || argc == 6) == false)
 		return (-1);
+	argv++;
 	i = 0;
 	while (i < argc - 1)
 	{
 		result = ut_atoi_with_error(argv[i]);
 		if (result < 0)
 			return (result);
-		substitute_info(share, i, result);
+		substitute_share(share, i, result);
 		i++;
 	}
 	if (argc == 5)
 		share->required_eat_count = -1;
 	share->stop_flag = false;
+	share->start_at_ms = now_ms();
 	return (0);
 }
 // required_eat_countは０に到達するまで行う回数とする？

@@ -16,5 +16,6 @@
 #include "philosophers.h"
 
 void	init_monitor(t_monitor *monitor, t_philo *philos, t_shared *share);
+void	*monitor(void *arg);
 
 #endif

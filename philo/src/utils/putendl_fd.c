@@ -12,6 +12,8 @@
 
 #include <stddef.h>
 #include <unistd.h>
+#include <errno.h>
+#include "error_macro.h"
 
 static size_t	_strlen(char *s)
 {
@@ -25,11 +27,28 @@ static size_t	_strlen(char *s)
 	return ((size_t)(s_cpy - s));
 }
 
+static void	handle_error(void)
+{
+	int	rtn;
+
+	if (errno == EACCES)
+		rtn = write(STDERR_FILENO, EACCES_ERROR, _strlen(EACCES_ERROR));
+	else if (errno == EBADF)
+		rtn = write(STDERR_FILENO, EBADF_ERROR, _strlen(EBADF_ERROR));
+	else if (errno == EFAULT)
+		rtn = write(STDERR_FILENO, EFAULT_ERROR, _strlen(EFAULT_ERROR));
+	else
+		rtn = write(STDERR_FILENO, UNKNOWN_ERROR, _strlen(UNKNOWN_ERROR));
+	(void)rtn;
+}
+
 void	putendl_fd(char *s, int fd)
 {
 	size_t	size;
 
 	size = _strlen(s);
-	write(fd, s, size);
-	write(fd, "\n", 1);
+	if (write(fd, s, size) == -1)
+		handle_error();
+	if (write(fd, "\n", 1) == -1)
+		handle_error();
 }

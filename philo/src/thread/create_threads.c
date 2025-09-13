@@ -13,8 +13,12 @@
 #include <pthread.h>
 #include <errno.h>
 #include <unistd.h>
+#include <stdlib.h>
+#include <stdio.h>
 #include "philosophers.h"
 #include "error_macro.h"
+#include "monitor.h"
+#include "utils.h"
 
 static int	check_ret(int ret)
 {
@@ -36,28 +40,29 @@ static int	check_ret(int ret)
 
 // 管理者用スレッドはどのような別変数にしたほうがよさそうかな？
 // 本当はエラーメッセージ用関数を設計したほうがよさそう。だけど，今回はいいや，
-int	create_threads(t_shared *share, pthread_t *threads)
+int	create_threads(t_philo *philo_resource, pthread_t *threads, t_monitor *monitor_resource)
 {
 	int	i;
 	int	ret;
 
+	ret = pthread_create(&(threads[philo_resource->share->num_philos]), NULL, monitor, (void *)monitor_resource);
+	if (check_ret(ret) == -1)
+		return (-1);
 	i = 0;
-	threads = malloc(sizeof(pthread_t) * share->num_philos);
-	if (threads == NULL)
-		return (putendl_fd(MALLOC_ERROR, STDERR_FILENO), -1);
-	while (i < share->num_philos)
+	while (i < philo_resource->share->num_philos)
 	{
-		ret = thread_create(&(threads[i]), NULL, philosopher, share); // 一旦，info
+		ret = pthread_create(&(threads[i]), NULL, philosopher, &(philo_resource[i])); // 一旦，info
 		if (check_ret(ret) == -1)
 		{
-			share->stop_flag = true;
+			philo_resource->share->stop_flag = true;
 			while (i > 0)
 			{
-				thread_join(threads[i], NULL);
-				i++;
+				pthread_join(threads[i], NULL);
+				i--;
 			}
 			return (-1);
 		}
 		i++;
 	}
+	return (0);
 }

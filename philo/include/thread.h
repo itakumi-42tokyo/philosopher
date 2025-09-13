@@ -15,7 +15,7 @@
 
 # include "philosophers.h"
 
-int		create_threads(t_shared *share, pthread_t *threads);
+int		create_threads(t_philo *philo_resource, pthread_t *threads, t_monitor *monitor_resource);
 int		is_stopped(t_shared *share);
 void	print_action(t_philo *philos, const char *msg);
 void	put_forks(t_philo *philo);

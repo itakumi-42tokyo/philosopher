@@ -17,6 +17,8 @@ void	init_all(t_shared *share)
 {
 	if (!share)
 		return;
+	
 	memset(share, 0, sizeof(t_shared));
 	pthread_mutex_init(&(share->print_mutex), NULL);
+	pthread_mutex_init(&(share->state_mutex), NULL);
 }
