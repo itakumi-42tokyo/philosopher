@@ -6,7 +6,7 @@
 #    By: itakumi <itakumi@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/09/07 13:06:06 by itakumi           #+#    #+#              #
-#    Updated: 2025/09/07 14:13:26 by itakumi          ###   ########.fr        #
+#    Updated: 2025/11/12 22:00:10 by itakumi          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ SRCS					:=	main.c \
 							philosopher.c \
 							calc_elapsed_time.c \
 							timestamp.c \
+							mark_stop.c \
 							ut_issign.c \
 							ut_isspace.c \
 							ut_now_time.c \
@@ -38,7 +39,6 @@ SRCS					:=	main.c \
 							take_forks.c
 
 VPATH					= src:include:src/monitor:src/parse:src/philosopher:src/utils:src/error_handle:src/mutex:src/thread
-
 
 OBJ_DIR					:= build
 OBJS					:= $(addprefix $(OBJ_DIR)/, $(SRCS:%.c=%.o))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ut_now_time.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigarashi <tigarashi@student.42.fr>        #+#  +:+       +#+        */
+/*   By: itakumi <itakumi@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-09-11 09:56:13 by tigarashi         #+#    #+#             */
-/*   Updated: 2025-09-11 09:56:13 by tigarashi        ###   ########.fr       */
+/*   Created: 2025/09/11 09:56:13 by tigarashi         #+#    #+#             */
+/*   Updated: 2025/11/12 21:30:45 by itakumi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 long long	now_ms(void)
 {
-	struct timeval ts;
+	struct timeval	ts;
 
 	if (gettimeofday(&ts, NULL) == -1)
 	{
@@ -29,7 +29,7 @@ long long	now_ms(void)
 
 long long	now_us(void)
 {
-	struct timeval ts;
+	struct timeval	ts;
 
 	if (gettimeofday(&ts, NULL) == -1)
 	{

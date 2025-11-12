@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_monitor.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigarashi <tigarashi@student.42.fr>        #+#  +:+       +#+        */
+/*   By: itakumi <itakumi@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-09-12 21:45:23 by tigarashi         #+#    #+#             */
-/*   Updated: 2025-09-12 21:45:23 by tigarashi        ###   ########.fr       */
+/*   Created: 2025/09/12 21:45:23 by tigarashi         #+#    #+#             */
+/*   Updated: 2025/10/29 16:06:15 by itakumi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

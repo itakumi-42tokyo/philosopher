@@ -6,7 +6,7 @@
 /*   By: itakumi <itakumi@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 14:48:06 by itakumi           #+#    #+#             */
-/*   Updated: 2025/09/08 15:05:07 by itakumi          ###   ########.fr       */
+/*   Updated: 2025/11/12 21:32:53 by itakumi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 void	put_timestamp(t_state state, int philo_number)
 {
 	(void)philo_number;
-
 	if (state == TAKING_FORK)
 		putendl_fd(TAKING_FORK_MSG, STDOUT_FILENO);
 	else if (state == EATING)

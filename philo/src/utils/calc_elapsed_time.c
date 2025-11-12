@@ -1,18 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   calc_elapsed_time_usec.c                           :+:      :+:    :+:   */
+/*   calc_elapsed_time.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: itakumi <itakumi@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/08 15:50:07 by itakumi           #+#    #+#             */
-/*   Updated: 2025/09/08 16:15:30 by itakumi          ###   ########.fr       */
+/*   Created: 2025/11/12 21:15:46 by itakumi           #+#    #+#             */
+/*   Updated: 2025/11/12 21:15:47 by itakumi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <sys/time.h>
 
-// before afterの関係は取れているものとする。
 long long	calc_elapsed_time_usec(struct timeval before, struct timeval after)
 {
 	long long		second;

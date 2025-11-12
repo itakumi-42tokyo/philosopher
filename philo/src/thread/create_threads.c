@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_threads.c                                   :+:      :+:    :+:   */
+/*   create_th.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigarashi <tigarashi@student.42.fr>        #+#  +:+       +#+        */
+/*   By: itakumi <itakumi@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-09-11 23:14:02 by tigarashi         #+#    #+#             */
-/*   Updated: 2025-09-11 23:14:02 by tigarashi        ###   ########.fr       */
+/*   Created: 2025/09/11 23:14:02 by tigarashi         #+#    #+#             */
+/*   Updated: 2025/11/12 21:20:01 by itakumi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,24 +37,26 @@ static int	check_ret(int ret)
 	return (0);
 }
 
-int	create_threads(t_philo *philo_resource, pthread_t *threads, t_monitor *monitor_resource)
+int	create_threads\
+(t_philo *philo_s, pthread_t *th, t_monitor *monitor_s)
 {
 	int	i;
 	int	ret;
 
-	ret = pthread_create(&(threads[philo_resource->share->num_philos]), NULL, monitor, (void *)monitor_resource);
+	ret = \
+	pthread_create(&(th[philo_s->share->num_philos]), NULL, monitor, monitor_s);
 	if (check_ret(ret) == -1)
 		return (-1);
 	i = 0;
-	while (i < philo_resource->share->num_philos)
+	while (i < philo_s->share->num_philos)
 	{
-		ret = pthread_create(&(threads[i]), NULL, philosopher, &(philo_resource[i]));
+		ret = pthread_create(&(th[i]), NULL, philosopher, &(philo_s[i]));
 		if (check_ret(ret) == -1)
 		{
-			philo_resource->share->stop_flag = true;
+			philo_s->share->stop_flag = true;
 			while (i > 0)
 			{
-				pthread_join(threads[i], NULL);
+				pthread_join(th[i], NULL);
 				i--;
 			}
 			return (-1);

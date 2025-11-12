@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   thread.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigarashi <tigarashi@student.42.fr>        #+#  +:+       +#+        */
+/*   By: itakumi <itakumi@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-09-12 00:41:43 by tigarashi         #+#    #+#             */
-/*   Updated: 2025-09-12 00:41:43 by tigarashi        ###   ########.fr       */
+/*   Created: 2025/09/12 00:41:43 by tigarashi         #+#    #+#             */
+/*   Updated: 2025/11/12 22:01:04 by itakumi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,12 @@
 
 # include "philosophers.h"
 
-int		create_threads(t_philo *philo_resource, pthread_t *threads, t_monitor *monitor_resource);
+int		
+create_threads\
+(t_philo *philo_src, pthread_t *threads, t_monitor *moni_src);
 int		is_stopped(t_shared *share);
 void	print_action(t_philo *philos, const char *msg);
+void	print_action2(t_philo *philos, const char *msg, long long now);
 void	put_forks(t_philo *philo);
 int		take_forks(t_philo *philo);
 

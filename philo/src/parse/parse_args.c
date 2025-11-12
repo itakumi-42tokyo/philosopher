@@ -6,7 +6,7 @@
 /*   By: itakumi <itakumi@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 17:13:50 by itakumi           #+#    #+#             */
-/*   Updated: 2025/09/08 17:14:26 by itakumi          ###   ########.fr       */
+/*   Updated: 2025/11/12 21:14:45 by itakumi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static void	substitute_share(t_shared *share, int i, int result)
 		share->required_eat_count = result;
 }
 
-//　引数の中に "0" が含まれていた場合は，この後対処することが要求されている。 
 int	parse_args(int argc, char **argv, t_shared *share)
 {
 	int		i;
@@ -54,4 +53,3 @@ int	parse_args(int argc, char **argv, t_shared *share)
 	share->start_at_ms = now_ms();
 	return (0);
 }
-// required_eat_countは０に到達するまで行う回数とする？

@@ -1,31 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_philos.c                                      :+:      :+:    :+:   */
+/*   mark_stop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: itakumi <itakumi@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/11 21:22:34 by tigarashi         #+#    #+#             */
-/*   Updated: 2025/11/12 21:27:27 by itakumi          ###   ########.fr       */
+/*   Created: 2025/11/12 21:45:27 by itakumi           #+#    #+#             */
+/*   Updated: 2025/11/12 21:52:26 by itakumi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include "philosophers.h"
-#include "utils.h"
 
-void	init_philos(t_philo *philos, t_shared *share)
+void	mark_stop(t_shared *share)
 {
-	int	id;
-
-	id = 0;
-	while (id < share->num_philos)
-	{
-		(philos[id]).id = id;
-		(philos[id]).right_fork = id;
-		(philos[id]).left_fork = (id + 1) % share->num_philos;
-		(philos[id]).last_eat_ms = now_ms();
-		(philos[id]).share = share;
-		id++;
-	}
+	pthread_mutex_lock(&(share->state_mutex));
+	share->stop_flag = 1;
+	pthread_mutex_unlock(&(share->state_mutex));
 }

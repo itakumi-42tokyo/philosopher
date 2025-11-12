@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   take_forks.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigarashi <tigarashi@student.42.fr>        #+#  +:+       +#+        */
+/*   By: itakumi <itakumi@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-09-12 07:24:29 by tigarashi         #+#    #+#             */
-/*   Updated: 2025-09-12 07:24:29 by tigarashi        ###   ########.fr       */
+/*   Created: 2025/09/12 07:24:29 by tigarashi         #+#    #+#             */
+/*   Updated: 2025/11/12 21:22:29 by itakumi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	take_forks(t_philo *philo)
 
 	a = philo->left_fork;
 	b = philo->right_fork;
-	if (a > b)
+	if (philo->id % 2 == 0)
 	{
 		tmp = a;
 		a = b;

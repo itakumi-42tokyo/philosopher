@@ -6,7 +6,7 @@
 /*   By: itakumi <itakumi@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 15:07:11 by itakumi           #+#    #+#             */
-/*   Updated: 2025/09/08 17:12:49 by itakumi          ###   ########.fr       */
+/*   Updated: 2025/11/12 21:57:57 by itakumi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,34 +23,26 @@
 #include "monitor.h"
 #include "error_macro.h"
 
-// やはり，堅牢性を求めると出力系の関数にまで，手を加える必要が出てくるところが面倒
-static int	alloc_philo_fork_thread(t_shared *share, t_philo **philos, pthread_t **threads, int num_philos)
+static int	alloc_src(t_shared *sh, t_philo **ph, pthread_t **th, int n_philo)
 {
-	*philos = malloc(sizeof(t_philo) * num_philos);
-	if (*philos == NULL)
+	*ph = malloc(sizeof(t_philo) * n_philo);
+	if (*ph == NULL)
 		return (-5);
-	share->forks = malloc(sizeof(pthread_mutex_t) * num_philos);
-	if(share->forks == NULL)
+	sh->forks = malloc(sizeof(pthread_mutex_t) * n_philo);
+	if (sh->forks == NULL)
 	{
-		free(*philos);
+		free(*ph);
 		return (-5);
 	}
-	*threads = malloc(sizeof(pthread_t) * (num_philos + 1));
-	if (*threads == NULL)
+	*th = malloc(sizeof(pthread_t) * (n_philo + 1));
+	if (*th == NULL)
 	{
-		free(*philos);
-		free(share->forks);
+		free(*ph);
+		free(sh->forks);
 		return (-5);
 	}
 	return (0);
 }
-// threadが必要なのは哲学者の数と，管理者１人？
-// mutexが必要なのはフォークと出力用のミューテックス？
-
-// info みたいにまとめて管理する必要を疑わなかったことが原因だ。
-// 実行開始
-// この処理を考える前に，どのようにして，forkを再現するかとか
-// philosopherの処理手順を書く必要がある。
 
 static void	join_thread_error_handle(int rtn)
 {
@@ -92,8 +84,7 @@ int	main(int argc, char **argv)
 	check = parse_args(argc, argv, &share);
 	if (check != 0)
 		error_exit(check);
-	// init_all(&share);
-	check = alloc_philo_fork_thread(&share, &philos, &threads, share.num_philos);
+	check = alloc_src(&share, &philos, &threads, share.num_philos);
 	if (check != 0)
 		error_exit(check);
 	if (init_mutexes(&share) == -1)

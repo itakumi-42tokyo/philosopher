@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.h                                            :+:      :+:    :+:   */
+/*   error_macro.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigarashi <tigarashi@student.42.fr>        #+#  +:+       +#+        */
+/*   By: itakumi <itakumi@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-09-11 09:58:25 by tigarashi         #+#    #+#             */
-/*   Updated: 2025-09-11 09:58:25 by tigarashi        ###   ########.fr       */
+/*   Created: 2025/09/11 09:58:25 by tigarashi         #+#    #+#             */
+/*   Updated: 2025/11/12 21:33:56 by itakumi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define ERROR_MACRO_H
 
 // Parse error
-# define INVALID_ARGC_ERROR				"Error: the number of argument is incorrect"
+# define INVALID_ARGC_ERROR \
+"Error: the number of argument is incorrect"
 # define MINUS_ERROR					"Error: input must not be negative"
 # define EXCEEDS_INT_MAX_ERROR			"Error: value exceeds INT_MAX"
 # define NAN_INPUT_ERROR				"Error: input must be a number"
@@ -35,9 +36,11 @@
 # define MUTEX_DESTROY_EBUSY_ERROR		"Error: mutex is still locked or in use"
 
 // thread_create
-# define THREAD_CREATE_EAGAIN_ERROR		"Error:  insufficient resources or thread limit reached"
+# define THREAD_CREATE_EAGAIN_ERROR \
+"Error:  insufficient resources or thread limit reached"
 # define THREAD_CREATE_EINVAL_ERROR		"Error: invalid thread attributes"
-# define THREAD_CREATE_EPERM_ERROR		"Error: no permission to set the specified attributes"
+# define THREAD_CREATE_EPERM_ERROR \
+"Error: no permission to set the specified attributes"
 
 // write ERRNO
 # define EBADF_ERROR					"Error: Bad file descriptor\n"

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_mutexs.c                                      :+:      :+:    :+:   */
+/*   init_mutexes.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigarashi <tigarashi@student.42.fr>        #+#  +:+       +#+        */
+/*   By: itakumi <itakumi@student.42tokyo.jp>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-09-11 22:15:26 by tigarashi         #+#    #+#             */
-/*   Updated: 2025-09-11 22:15:26 by tigarashi        ###   ########.fr       */
+/*   Created: 2025/09/11 22:15:26 by tigarashi         #+#    #+#             */
+/*   Updated: 2025/11/12 21:27:38 by itakumi          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	destroy_mutex(t_shared *share, int i)
 	{
 		pthread_mutex_destroy(&(share->forks[i]));
 		i--;
-	}	
+	}
 }
 
 static int	check_ret(t_shared *share, int ret, int i)
